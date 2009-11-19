@@ -30,15 +30,16 @@ class AThread
 public:
     AThread()
         : Thread(Joinable)
+        , string("Test")
     {
     }
 
 protected:
     virtual void run()
     {
-        for (iint32 i = 0; i < 100000; ++i) {
+        for (iint32 i = 0; i < 10; ++i) {
             String str(string);
-            string.clear();
+            string = "Test";
         }
     }
 
@@ -59,7 +60,7 @@ public:
 protected:
     virtual void run()
     {
-        for (iint32 i = 0; i < 100000; ++i) {
+        for (iint32 i = 0; i < 10; ++i) {
             String str(aThread->string);
             aThread->string.clear();
         }
@@ -81,7 +82,7 @@ int main(int argc, char **argv)
     aThread->join();
     otherThread->join();
     
-    IDEAL_SDEBUG("result is" << aThread->string);
+    IDEAL_SDEBUG("result is " << aThread->string);
 
     delete aThread;
     delete otherThread;
