@@ -37,7 +37,7 @@ public:
 protected:
     virtual void run()
     {
-        for (iint32 i = 0; i < 10; ++i) {
+        for (iint32 i = 0; i < 100000; ++i) {
             String str(string);
             string = "Test";
         }
@@ -60,7 +60,7 @@ public:
 protected:
     virtual void run()
     {
-        for (iint32 i = 0; i < 10; ++i) {
+        for (iint32 i = 0; i < 100000; ++i) {
             String str(aThread->string);
             aThread->string.clear();
         }
