@@ -40,8 +40,8 @@ int main(int argc, char **argv)
     File f(app.getPath(Application::Home), &app);
     Object::connectStatic(f.statResult, statResult);
     Thread *stat = f.stat(Thread::Joinable);
-    stat->exec();
-    stat->join();
+    stat->execAndJoin();
+    delete stat;
 
     return 0;
 }
