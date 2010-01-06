@@ -2,7 +2,6 @@
 
 # This file is part of the Ideal Library
 # Copyright (C) 2009 Rafael Fernández López <ereslibre@ereslibre.es>
-# Copyright (C) 2010 Rafael Fernández López <ereslibre@ereslibre.es>
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
@@ -22,7 +21,7 @@
 bld.new_task_gen(
     features     = 'cxx cprogram',
     source       = 'main.cpp',
-    target       = 'getTypeFile',
+    target       = 'fileTest3',
     uselib       = 'IDEALCORE',
     rpath        = bld.env['LIBPATH_IDEALCORE'],
     install_path = None

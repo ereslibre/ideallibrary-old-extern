@@ -21,7 +21,7 @@
 
 bld.new_task_gen(
     features     = 'cxx cprogram',
-    source       = bld.glob('*.cpp'),
+    source       = 'main.cpp',
     target       = 'mediaPlayer',
     uselib       = 'IDEALCORE',
     rpath        = bld.env['LIBPATH_IDEALCORE'],

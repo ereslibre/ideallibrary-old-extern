@@ -2,7 +2,6 @@
 
 # This file is part of the Ideal Library
 # Copyright (C) 2009 Rafael Fernández López <ereslibre@ereslibre.es>
-# Copyright (C) 2010 Rafael Fernández López <ereslibre@ereslibre.es>
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Library General Public
@@ -19,11 +18,24 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-bld.new_task_gen(
-    features     = 'cxx cprogram',
-    source       = 'main.cpp',
-    target       = 'getTypeFile',
-    uselib       = 'IDEALCORE',
-    rpath        = bld.env['LIBPATH_IDEALCORE'],
-    install_path = None
-)
+def configure(conf):
+    conf.define('OWNMODULESTEST_PREFIX', conf.env['PREFIX'])
+    conf.write_config_header('ownmodulestest_conf.h')
+
+def build(bld):
+    bld.new_task_gen(
+        features     = 'cxx cprogram',
+        source       = 'main.cpp',
+        target       = 'ownModulesTest',
+        includes     = '.',
+        uselib       = 'IDEALCORE',
+        rpath        = bld.env['LIBPATH_IDEALCORE'],
+        install_path = None
+    )
+    bld.new_task_gen(
+        features     = 'cxx cshlib',
+        source       = 'module.cpp',
+        target       = 'ownModulesTestModule',
+        uselib       = 'IDEALCORE',
+        install_path = '${PREFIX}/lib/ownModulesTest/modules'
+    )

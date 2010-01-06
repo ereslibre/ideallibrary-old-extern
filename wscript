@@ -18,12 +18,12 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
+import os
+
 VERSION    = '1.0'
 APPNAME    = 'externTests'
 srcdir     = '.'
 blddir     = 'build'
-
-externTests = ['getTypeFile', 'mediaPlayer']
 
 def init():
     pass
@@ -35,7 +35,52 @@ def configure(conf):
     conf.check_tool('compiler_cxx')
     conf.find_program('pkg-config')
     conf.check_cfg(package = 'idealcore', args = '--cflags --libs')
+    conf.check_cfg(package = 'idealgui', args = '--cflags --libs')
     conf.env['CXXFLAGS'] += ['-std=c++0x', '-g']
+    conf.sub_config(['ownModulesTest',
+                     'pathTest'])
 
 def build(bld):
-	bld.add_subdirs(externTests)
+    bld.add_subdirs(['anyTest',
+                     'basicApp',
+                     'callAfterTest',
+                     'connectionTest',
+                     'crossedDeletions',
+                     'deleteAfterSignal',
+                     'fileTest',
+                     'fileTest2',
+                     'fileTest3',
+                     'getTypeFile',
+                     'guiTest',
+                     'guiTest2',
+                     'idleTest',
+                     'leakTest',
+                     'localeTest',
+                     'mediaPlayer',
+                     'mkdirTest',
+                     'multiSlotTest',
+                     'nonBlockingGUI',
+                     'ownModulesTest',
+                     'pathTest',
+                     'processTest',
+                     'protocolHandlerTest',
+                     'protocolHandlerTest2',
+                     'regExpTest',
+                     'reparentTest',
+                     'sigpipeTest',
+                     'sigsegvTest',
+                     'stringTest',
+                     'threadTest',
+                     'threadTest2',
+                     'threadTest3',
+                     'threadTest4',
+                     'threadTest5',
+                     'threadTest6',
+                     'threadTest7',
+                     'threadTest8',
+                     'threadTest9',
+                     'threadTest10',
+                     'timerTest',
+                     'timerTest2',
+                     'uriTest',
+                     'virtualTest'])
