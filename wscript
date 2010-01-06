@@ -27,10 +27,10 @@ def init():
     pass
 
 def set_options(opt):
-    opt.tool_options('compiler_cxx qt4')
+    opt.tool_options('compiler_cxx')
 
 def configure(conf):
-    conf.check_tool('compiler_cxx qt4')
+    conf.check_tool('compiler_cxx')
     conf.find_program('pkg-config')
     conf.check_cfg(package = 'idealcore', args = '--cflags --libs')
     conf.check_cfg(package = 'idealgui', args = '--cflags --libs')

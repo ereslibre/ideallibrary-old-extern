@@ -26,5 +26,3 @@ bld.new_task_gen(
     rpath        = bld.env['LIBPATH_IDEALCORE'],
     install_path = None
 )
-
-bld.add_subdirs('comparison/qt')
