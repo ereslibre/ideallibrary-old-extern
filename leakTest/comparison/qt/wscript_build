@@ -19,12 +19,10 @@
 # Boston, MA 02110-1301, USA.
 
 bld.new_task_gen(
-    features     = 'cxx cprogram',
+    features     = 'cxx cprogram qt4',
     source       = 'main.cpp',
-    target       = 'leakTest',
-    uselib       = 'IDEALCORE',
-    rpath        = bld.env['LIBPATH_IDEALCORE'],
+    target       = 'leakTestQt',
+    includes     = '.',
+    uselib       = 'QTCORE',
     install_path = None
 )
-
-bld.add_subdirs('comparison/qt')

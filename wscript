@@ -18,8 +18,6 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301, USA.
 
-import os
-
 VERSION    = '1.0'
 APPNAME    = 'externTests'
 srcdir     = '.'
@@ -29,10 +27,10 @@ def init():
     pass
 
 def set_options(opt):
-    opt.tool_options('compiler_cxx')
+    opt.tool_options('compiler_cxx qt4')
 
 def configure(conf):
-    conf.check_tool('compiler_cxx')
+    conf.check_tool('compiler_cxx qt4')
     conf.find_program('pkg-config')
     conf.check_cfg(package = 'idealcore', args = '--cflags --libs')
     conf.check_cfg(package = 'idealgui', args = '--cflags --libs')

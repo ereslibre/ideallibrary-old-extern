@@ -26,3 +26,12 @@ bld.new_task_gen(
     rpath        = bld.env['LIBPATH_IDEALCORE'],
     install_path = None
 )
+
+bld.new_task_gen(
+    features     = 'cxx cprogram',
+    source       = 'comparison/qt/main.cpp',
+    target       = 'stringTestQt',
+    includes     = '.',
+    uselib       = 'QTCORE',
+    install_path = None
+)

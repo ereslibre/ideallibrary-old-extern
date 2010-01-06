@@ -19,6 +19,7 @@
  */
 
 #include <QtCore/QString>
+#include <QtCore/QDebug>
 #include <locale.h>
 #include <iostream>
 
@@ -28,6 +29,6 @@ int main(int argc, char **argv)
     for (int i = 0; i < 1000; ++i) {
         QString str("Test");
         QString str2("Teñt");
-        IDEAL_SDEBUG("Is Teñt < Test ? " << (bool) (QString::localeAwareCompare(str2, str) < 0));
+        qDebug() << "Is Teñt < Test ? " << (bool) (QString::localeAwareCompare(str2, str) < 0);
     }
 }
