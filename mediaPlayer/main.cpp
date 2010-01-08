@@ -84,7 +84,7 @@ void MediaPlayer::executeAction(Object *sender)
 {
     if (sender == m_playPause) {
         IDEAL_SDEBUG("Play or pause was clicked");
-    } else if (sender == m_stop ) {
+    } else if (sender == m_stop) {
         IDEAL_SDEBUG("Stop was clicked");
     } else {
         IDEAL_SDEBUG("Quit was clicked");
