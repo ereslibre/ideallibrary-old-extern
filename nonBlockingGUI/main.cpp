@@ -53,16 +53,23 @@ bool MyWidget::event(IdealCore::Event *event)
     if (event->type() == IdealCore::Event::MapNotify ||
         event->type() == IdealCore::Event::Expose) {
         Painter p(this);
-        p.drawLine(Point(10, 10), Point(100, 100));
-        p.drawLine(Point(200, 100), Point(300, 300));
-        p.setPenColor(1.0, 0, 0);
-        p.drawLine(Point(200, 400), Point(600, 200));
-        p.setPenColor(0, 0, 0);
-        p.drawLine(Point(280, 160), Point(600, 400));
-        p.drawPoint(Point(600, 20));
-        p.drawText(Point(300, 400), "Hi, how are you ?");
-        p.drawText(Point(300, 420), "Some special characters: á, é, í, ó, ú, €, ñ");
-        p.drawText(Point(300, 440), "More special characters: ЂЉЊЋЏђ, абвгдеёжзий");
+        p.moveTo(10, 10);
+        p.lineTo(100, 100);
+        p.moveTo(200, 100);
+        p.lineTo(300, 300);
+        p.setSourceRGB(1.0, 0, 0);
+        p.moveTo(200, 400);
+        p.lineTo(600, 200);
+        p.setSourceRGB(0, 0, 0);
+        p.moveTo(280, 160);
+        p.lineTo(600, 400);
+        p.rectangle(600, 20, 2, 2);
+        p.moveTo(300, 400);
+        p.showText("Hi, how are you ?");
+        p.moveTo(300, 420);
+        p.showText("Some special characters: á, é, í, ó, ú, €, ñ");
+        p.moveTo(300, 440);
+        p.showText("More special characters: ЂЉЊЋЏђ, абвгдеёжзий");
     } else if (event->type() == IdealCore::Event::ButtonPress) {
         bool printed = false;
         while (true) {

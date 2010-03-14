@@ -57,9 +57,11 @@ bool MyWidget::event(IdealCore::Event *event)
     if (event->type() == IdealCore::Event::MapNotify ||
         event->type() == IdealCore::Event::Expose) {
         Painter p(this);
-        p.drawLine(Point(10, 10), Point(210, 210));
-        p.drawLine(Point(210, 10), Point(10, 210));
-        p.drawRectangle(Point(10, 10), Size(200, 200));
+        p.moveTo(10, 10);
+        p.lineTo(210, 210);
+        p.moveTo(210, 10);
+        p.lineTo(10, 210);
+        p.rectangle(10, 10, 200, 200);
     } else if (event->type() == IdealCore::Event::KeyPress) {
        IDEAL_SDEBUG("*** Retrieving size of file...");
        IdealCore::Thread *stat = myFile->stat();
