@@ -34,6 +34,8 @@ class MyWidget
 public:
     MyWidget(Object *parent);
 
+    void myTimeout();
+
     virtual Size minimumSize() const;
 
 protected:
@@ -45,13 +47,21 @@ private:
 private:
     ireal m_radius;
     ireal m_line_width;
+    bool  m_color;
 };
 
 MyWidget::MyWidget(Object *parent)
     : Widget(parent)
     , m_radius(200)
     , m_line_width(2)
+    , m_color(false)
 {
+}
+
+void MyWidget::myTimeout()
+{
+    m_color = !m_color;
+    update();
 }
 
 Size MyWidget::minimumSize() const
@@ -71,6 +81,13 @@ bool MyWidget::event(IdealCore::Event *event)
 void MyWidget::drawClock()
 {
     Painter p(this);
+
+    if (m_color) {
+        p.setSourceRGB(1.0, 0, 0);
+    } else {
+        p.setSourceRGB(0, 0, 0);
+    }
+
     p.translate(minimumSize().width() / 2.0, minimumSize().height() / 2.0);
     p.setLineWidth(m_line_width);
     p.arc(0, 0, m_radius, 0, 2 * M_PI);
@@ -262,6 +279,11 @@ int main(int argc, char **argv)
 
     MyWidget *myWidget = new MyWidget(&app);
     myWidget->show(Point(0, 0));
+
+    IdealCore::Timer *timer = new IdealCore::Timer(&app);
+    timer->setInterval(1000);
+    IdealCore::Object::connect(timer->timeout, myWidget, &MyWidget::myTimeout);
+    timer->start(IdealCore::Timer::NoSingleShot);
 
     return app.exec();
 }

@@ -42,6 +42,7 @@ def build(bld):
     bld.add_subdirs(['anyTest',
                      'basicApp',
                      'callAfterTest',
+                     'clockTest',
                      'connectionTest',
                      'crossedDeletions',
                      'deleteAfterSignal',
