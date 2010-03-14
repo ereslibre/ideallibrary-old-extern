@@ -92,6 +92,7 @@ bool OtherWidget::event(IdealCore::Event *event)
         event->type() == IdealCore::Event::Expose) {
         Painter p(this);
         p.rectangle(0, 0, 100, 100);
+        p.stroke();
     } else if (event->type() == IdealCore::Event::ButtonPress) {
         Painter p(this);
         p.rectangle(0, 0, 100, 100);
@@ -99,6 +100,7 @@ bool OtherWidget::event(IdealCore::Event *event)
         p.lineTo(100, 100);
         p.moveTo(100, 0);
         p.lineTo(0, 100);
+        p.stroke();
     } else if (event->type() == IdealCore::Event::ButtonRelease) {
         application()->quit();
     }

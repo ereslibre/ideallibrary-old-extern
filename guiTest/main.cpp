@@ -62,6 +62,7 @@ bool MyWidget::event(IdealCore::Event *event)
         p.moveTo(210, 10);
         p.lineTo(10, 210);
         p.rectangle(10, 10, 200, 200);
+        p.stroke();
     } else if (event->type() == IdealCore::Event::KeyPress) {
        IDEAL_SDEBUG("*** Retrieving size of file...");
        IdealCore::Thread *stat = myFile->stat();

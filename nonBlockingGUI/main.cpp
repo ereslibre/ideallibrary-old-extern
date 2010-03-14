@@ -64,6 +64,7 @@ bool MyWidget::event(IdealCore::Event *event)
         p.moveTo(280, 160);
         p.lineTo(600, 400);
         p.rectangle(600, 20, 2, 2);
+        p.stroke();
         p.moveTo(300, 400);
         p.showText("Hi, how are you ?");
         p.moveTo(300, 420);
