@@ -36,13 +36,8 @@ public:
 
     void myTimeout();
 
+    virtual void drawWidget();
     virtual Size minimumSize() const;
-
-protected:
-    virtual bool event(IdealCore::Event *event);
-
-private:
-    void drawClock();
 
 private:
     ireal m_radius;
@@ -61,24 +56,10 @@ MyWidget::MyWidget(Object *parent)
 void MyWidget::myTimeout()
 {
     m_color = !m_color;
-    update();
+    drawWidget();
 }
 
-Size MyWidget::minimumSize() const
-{
-    return Size(640, 480);
-}
-
-bool MyWidget::event(IdealCore::Event *event)
-{
-    if (event->type() == IdealCore::Event::MapNotify ||
-        event->type() == IdealCore::Event::Expose) {
-        drawClock();
-    }
-    return false;
-}
-
-void MyWidget::drawClock()
+void MyWidget::drawWidget()
 {
     Painter p(this);
 
@@ -271,6 +252,11 @@ void MyWidget::drawClock()
     cr->fill();
   }
 #endif
+}
+
+Size MyWidget::minimumSize() const
+{
+    return Size(640, 480);
 }
 
 int main(int argc, char **argv)
