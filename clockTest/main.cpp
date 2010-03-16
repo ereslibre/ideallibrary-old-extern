@@ -41,21 +41,20 @@ public:
 
 private:
     ireal m_radius;
-    ireal m_line_width;
+    ireal m_lineWidth;
     bool  m_color;
 };
 
 MyWidget::MyWidget(Object *parent)
     : Widget(parent)
     , m_radius(200)
-    , m_line_width(2)
+    , m_lineWidth(2)
     , m_color(false)
 {
 }
 
 void MyWidget::myTimeout()
 {
-    m_color = !m_color;
     drawWidget();
 }
 
@@ -70,7 +69,7 @@ void MyWidget::drawWidget()
     }
 
     p.translate(minimumSize().width() / 2.0, minimumSize().height() / 2.0);
-    p.setLineWidth(m_line_width);
+    p.setLineWidth(m_lineWidth);
     p.arc(0, 0, m_radius, 0, 2 * M_PI);
     p.save();
 
@@ -98,7 +97,7 @@ void MyWidget::drawWidget()
         p.stroke();
         p.restore();
     }
-#if 0
+
     // store the current time
     time_t rawtime;
     time(&rawtime);
@@ -109,39 +108,39 @@ void MyWidget::drawWidget()
     double hours = timeinfo->tm_hour * M_PI / 6;
     double seconds= timeinfo->tm_sec * M_PI / 30;
 
-    cr->save();
-    cr->set_line_cap(Cairo::LINE_CAP_ROUND);
+    p.save();
+    p.setLineCap(Painter::RoundLineCap);
 
     // draw the seconds hand
-    cr->save();
-    cr->set_line_width(m_line_width / 3);
-    cr->set_source_rgba(0.7, 0.7, 0.7, 0.8); // gray
-    cr->move_to(0, 0);
-    cr->line_to(sin(seconds) * (m_radius * 0.9), 
-            -cos(seconds) * (m_radius * 0.9));
-    cr->stroke();
-    cr->restore();
+    p.save();
+    p.setLineWidth(m_lineWidth);
+    p.setSourceRGBA(0.7, 0.7, 0.7, 0.8);
+    p.moveTo(0, 0);
+    p.lineTo(sin(seconds) * (m_radius * 0.9),
+             -cos(seconds) * (m_radius * 0.9));
+    p.stroke();
+    p.restore();
 
     // draw the minutes hand
-    cr->set_source_rgba(0.117, 0.337, 0.612, 0.9);   // blue
-    cr->move_to(0, 0);
-    cr->line_to(sin(minutes + seconds / 60) * (m_radius * 0.8),
-            -cos(minutes + seconds / 60) * (m_radius * 0.8));
-    cr->stroke();
+    p.setSourceRGBA(0.117, 0.337, 0.612, 0.9);
+    p.moveTo(0, 0);
+    p.lineTo(sin(minutes + seconds / 60.0) * (m_radius * 0.8),
+             -cos(minutes + seconds / 60.0) * (m_radius * 0.8));
+    p.stroke();
 
     // draw the hours hand
-    cr->set_source_rgba(0.337, 0.612, 0.117, 0.9);   // green
-    cr->move_to(0, 0);
-    cr->line_to(sin(hours + minutes / 12.0) * (m_radius * 0.5),
-            -cos(hours + minutes / 12.0) * (m_radius * 0.5));
-    cr->stroke();
-    cr->restore();
+    p.setSourceRGBA(0.337, 0.612, 0.117, 0.9);
+    p.moveTo(0, 0);
+    p.lineTo(sin(hours + minutes / 12.0) * (m_radius * 0.5),
+             -cos(hours + minutes / 12.0) * (m_radius * 0.5));
+    p.stroke();
+    p.restore();
 
-    // draw a little dot in the middle
-    cr->arc(0, 0, m_line_width / 3.0, 0, 2 * M_PI);
-    cr->fill();
-  }
+    p.setSourceRGBA(1, 0, 0, 0.5);
+    p.arc(0, 0, m_lineWidth * 2.0, 0, 2.0 * M_PI);
+    p.fill();
 
+#if 0
   // This is where we draw on the window
   Glib::RefPtr<Gdk::Window> window = get_window();
   if(window)
