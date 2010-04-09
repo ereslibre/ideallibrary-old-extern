@@ -99,6 +99,54 @@ void OtherObject::staticMethodMulti(Object *sender)
     IDEAL_SDEBUG("A signal was received on a static method and was sent by " << sender);
 }
 
+class A
+    : public IdealCore::Object
+{
+public:
+    A(IdealCore::Object *parent);
+    virtual ~A();
+
+    virtual void virtualMethod() = 0;
+};
+
+A::A(IdealCore::Object *parent)
+    : Object(parent)
+{
+}
+
+A::~A()
+{
+}
+
+void A::virtualMethod()
+{
+    IDEAL_SDEBUG("Virtual method at class A");
+}
+
+class B
+    : public A
+{
+public:
+    B(IdealCore::Object *parent);
+    virtual ~B();
+
+    virtual void virtualMethod();
+};
+
+B::B(IdealCore::Object *parent)
+    : A(parent)
+{
+}
+
+B::~B()
+{
+}
+
+void B::virtualMethod()
+{
+    IDEAL_SDEBUG("Virtual method at class B");
+}
+
 int main(int argc, char **argv)
 {
     IdealCore::Application app(argc, argv);
@@ -157,6 +205,12 @@ int main(int argc, char **argv)
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
     myObject->emitOtherSignal();
+
+    // connect a signal to a virtual method in base class
+    A *a = new B(&app);
+    IdealCore::Object::connect(myObject->mySignal, a, &A::virtualMethod);
+    myObject->emitMySignal();
+    delete a;
 
     delete myObject;
     delete otherObject;
