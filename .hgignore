@@ -4,3 +4,4 @@ syntax: glob
 build
 .kdev_include_paths
 externTests.kdev4
+extern.kdev4
