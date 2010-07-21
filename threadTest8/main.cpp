@@ -30,8 +30,7 @@ static void printResult(iint32 result)
 }
 
 class OneClass
-    : public Object
-    , public Thread
+    : public Thread
 {
 public:
     OneClass(Object *parent);
@@ -43,8 +42,7 @@ protected:
 };
 
 OneClass::OneClass(Object *parent)
-    : Object(parent)
-    , Thread(NoJoinable)
+    : Thread(parent, NoJoinable)
     , IDEAL_SIGNAL_INIT(resultOfHeavyMath, int)
 {
 }

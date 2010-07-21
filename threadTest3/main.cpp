@@ -56,7 +56,7 @@ class OneClass
     : public Thread
 {
 public:
-    OneClass();
+    OneClass(Object *parent);
 
     AnObject *object;
 
@@ -64,8 +64,8 @@ protected:
     void run();
 };
 
-OneClass::OneClass()
-    : Thread(NoJoinable)
+OneClass::OneClass(Object *parent)
+    : Thread(parent, NoJoinable)
 {
 }
 
@@ -93,9 +93,9 @@ int main(int argc, char **argv)
     Application app(argc, argv);
 
     AnObject *anObject = new AnObject(&app);
-    OneClass *oneClass = new OneClass;
+    OneClass *oneClass = new OneClass(&app);
     oneClass->object = anObject;
-    OneClass *otherClass = new OneClass;
+    OneClass *otherClass = new OneClass(&app);
     otherClass->object = anObject;
 
     oneClass->exec();

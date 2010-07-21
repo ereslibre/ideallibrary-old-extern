@@ -1,6 +1,6 @@
 /*
  * This file is part of the Ideal Library
- * Copyright (C) 2009 Rafael Fernández López <ereslibre@ereslibre.es>
+ * Copyright (C) 2010 Rafael Fernández López <ereslibre@ereslibre.es>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,44 +24,25 @@
 
 using namespace IdealCore;
 
-static void printResult(iint32 result)
+static void newThreadFunction()
 {
-    IDEAL_SDEBUG("The result of the heavy math is " << result);
-}
-
-class OneClass
-    : public Thread
-{
-public:
-    OneClass(Object *parent);
-
-    IDEAL_SIGNAL(resultOfHeavyMath, iint32);
-
-protected:
-    void run();
-};
-
-OneClass::OneClass(Object *parent)
-    : Thread(parent, NoJoinable)
-    , IDEAL_SIGNAL_INIT(resultOfHeavyMath, iint32)
-{
-}
-
-void OneClass::run()
-{
-    // Do expensive math here
-    emit(resultOfHeavyMath, 1234);
+    for (int i = 0; i < 10; ++i) {
+        IDEAL_SDEBUG("*** In new thread");
+        Timer::wait(1);
+    }
 }
 
 int main(int argc, char **argv)
 {
     Application app(argc, argv);
 
-    OneClass *oneClass = new OneClass(&app);
-    Object::connectStatic(oneClass->resultOfHeavyMath, printResult);
-    oneClass->exec();
-
-    Timer::wait(500);
+    Thread *thread = new Thread(&app, Thread::Joinable);
+    Object::connectStatic(thread->started, newThreadFunction);
+    thread->exec();
+    for (int i = 0; i < 10; ++i) {
+        IDEAL_SDEBUG("*** In old thread");
+        Timer::wait(1);
+    }
 
     return 0;
 }

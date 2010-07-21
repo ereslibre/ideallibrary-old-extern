@@ -28,14 +28,14 @@ class OneClass
     : public Thread
 {
 public:
-    OneClass();
+    OneClass(Object *parent);
 
 protected:
     void run();
 };
 
-OneClass::OneClass()
-    : Thread(NoJoinable)
+OneClass::OneClass(Object *parent)
+    : Thread(parent, NoJoinable)
 {
 };
 
@@ -50,8 +50,8 @@ int main(int argc, char **argv)
 {
     Application app(argc, argv);
 
-    OneClass *oneClass = new OneClass;
-    OneClass *otherClass = new OneClass;
+    OneClass *oneClass = new OneClass(&app);
+    OneClass *otherClass = new OneClass(&app);
 
     oneClass->exec();
     otherClass->exec();

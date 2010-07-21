@@ -27,9 +27,17 @@ using namespace IdealCore;
 class OneClass
     : public Thread
 {
+public:
+    OneClass(Object *parent);
+
 protected:
     void run();
 };
+
+OneClass::OneClass(Object *parent)
+    : Thread(parent)
+{
+}
 
 void OneClass::run()
 {
@@ -40,7 +48,7 @@ int main(int argc, char **argv)
 {
     Application app(argc, argv);
 
-    OneClass *oneClass = new OneClass;
+    OneClass *oneClass = new OneClass(&app);
     oneClass->exec();
     oneClass->join();
     oneClass->exec();

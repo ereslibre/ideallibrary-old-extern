@@ -79,6 +79,7 @@ def build(bld):
                      'threadTest8',
                      'threadTest9',
                      'threadTest10',
+                     'threadTest11',
                      'timerTest',
                      'timerTest2',
                      'uriTest',
