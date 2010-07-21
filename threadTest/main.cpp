@@ -69,8 +69,7 @@ CondVar cond1 = CondVar(mutex1);
 CondVar cond2 = CondVar(mutex2);
 
 class OneClass
-    : public Object
-    , public Thread
+    : public Thread
 {
 public:
     OneClass(Object *parent);
@@ -82,7 +81,7 @@ protected:
 };
 
 OneClass::OneClass(Object *parent)
-    : Object(parent)
+    : Thread(Joinable, parent)
     , object(new AnObject(this))
 {
 }
@@ -101,8 +100,7 @@ void OneClass::run()
 }
 
 class OtherClass
-    : public Object
-    , public Thread
+    : public Thread
 {
 public:
     OtherClass(Object *parent);
@@ -114,7 +112,7 @@ protected:
 };
 
 OtherClass::OtherClass(Object *parent)
-    : Object(parent)
+    : Thread(Joinable, parent)
     , object(new AnObject(this))
 {
 }
