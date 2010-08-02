@@ -44,7 +44,7 @@ AnObject::AnObject(Object *parent)
 
 void AnObject::emitIt()
 {
-    emit(aSignal);
+    aSignal.emit();
 }
 
 void AnObject::slot()

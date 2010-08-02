@@ -62,7 +62,7 @@ public:
 
     void emitSignal()
     {
-        emit(trigger);
+        trigger.emit();
     }
 
     IDEAL_SIGNAL(trigger);

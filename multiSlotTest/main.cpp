@@ -44,7 +44,7 @@ MediaButton::MediaButton(Object *parent)
 
 void MediaButton::emitPressed(iint32 a, iint32 b, iint32 c)
 {
-    emit(buttonPressed, a, b, c);
+    buttonPressed.emit(a, b, c);
 }
 
 class MediaPlayer
@@ -52,7 +52,7 @@ class MediaPlayer
 {
 public:
     MediaPlayer(IdealCore::Object *parent);
-    
+
     void actionReceived(IdealCore::Object *sender, iint32 a, iint32 b, iint32 c);
 
 public:
@@ -69,10 +69,10 @@ MediaPlayer::MediaPlayer(Object *parent)
     , stop(new MediaButton(this))
     , exit(new MediaButton(this))
 {
-    connectMulti(play->buttonPressed, this, &MediaPlayer::actionReceived);
-    connectMulti(pause->buttonPressed, this, &MediaPlayer::actionReceived);
-    connectMulti(stop->buttonPressed, this, &MediaPlayer::actionReceived);
-    connectMulti(exit->buttonPressed, this, &MediaPlayer::actionReceived);
+    play->buttonPressed.connectMulti(this, &MediaPlayer::actionReceived);
+    pause->buttonPressed.connectMulti(this, &MediaPlayer::actionReceived);
+    stop->buttonPressed.connectMulti(this, &MediaPlayer::actionReceived);
+    exit->buttonPressed.connectMulti(this, &MediaPlayer::actionReceived);
 }
 
 void MediaPlayer::actionReceived(IdealCore::Object *sender, iint32 a, iint32 b, iint32 c)
@@ -102,6 +102,6 @@ int main(int argc, char **argv)
     mediaPlayer.play->emitPressed(5, 1, 8);
     mediaPlayer.stop->emitPressed(6, 4, 2);
     mediaPlayer.exit->emitPressed(9, 3, 1);
-    
+
     return 0;
 }

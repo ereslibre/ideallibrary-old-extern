@@ -37,17 +37,17 @@ public:
 
     void emitMySignal()
     {
-        emit(mySignal);
+        mySignal.emit();
     }
 
     void emitMySignalFromConst() const
     {
-        emit(mySignal);
+        mySignal.emit();
     }
 
     void emitOtherSignal()
     {
-        emit(otherSignal);
+        otherSignal.emit();
     }
 };
 

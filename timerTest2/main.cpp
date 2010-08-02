@@ -52,17 +52,17 @@ int main(int argc, char **argv)
     s_app = &app;
 
     Timer *timer = new Timer(&app);
-    Object::connectStatic(timer->timeout, timeout);
+    timer->timeout.connectStatic(timeout);
     timer->setInterval(2000);
     timer->start(Timer::NoSingleShot);
 
     timer2 = new Timer(&app);
-    Object::connectStatic(timer2->timeout, timeout2);
+    timer2->timeout.connectStatic(timeout2);
     timer2->setInterval(3000);
     timer2->start(Timer::NoSingleShot);
 
     Timer *timer3 = new Timer(&app);
-    Object::connectStatic(timer3->timeout, timeout3);
+    timer3->timeout.connectStatic(timeout3);
     timer3->setInterval(3000);
     timer3->start(Timer::NoSingleShot);
 

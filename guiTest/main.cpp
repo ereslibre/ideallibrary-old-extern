@@ -82,7 +82,7 @@ int main(int argc, char **argv)
     Application app(argc, argv);
 
     myFile = new IdealCore::File("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.22.1.tar.gz", &app);
-    IdealCore::Object::connectStatic(myFile->statResult, statRes);
+    myFile->statResult.connectStatic(statRes);
 
     MyWidget *myWidget = new MyWidget(&app);
     myWidget->show(Point(0, 0));

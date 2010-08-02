@@ -50,10 +50,10 @@ OneClass::OneClass(Object *parent)
 void OneClass::run()
 {
     // Do expensive math here
-    emit(resultOfHeavyMath, 1234);
-    emit(resultOfHeavyMath, 5678);
-    emit(resultOfHeavyMath, 9123);
-    emit(resultOfHeavyMath, 4567);
+    resultOfHeavyMath.emit(1234);
+    resultOfHeavyMath.emit(5678);
+    resultOfHeavyMath.emit(9123);
+    resultOfHeavyMath.emit(4567);
 }
 
 class OtherClass

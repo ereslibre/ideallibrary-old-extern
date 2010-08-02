@@ -41,12 +41,12 @@ int main(int argc, char **argv)
     Application app(argc, argv);
 
     Timer *timer = new Timer(&app);
-    Object::connectStatic(timer->timeout, timeout);
+    timer->timeout.connectStatic(timeout);
     timer->setInterval(1000);
     timer->start(Timer::NoSingleShot);
 
     Timer *timer2 = new Timer(&app);
-    Object::connectStatic(timer2->timeout, timeout2);
+    timer2->timeout.connectStatic(timeout2);
     timer2->setInterval(2000);
     timer2->start(Timer::NoSingleShot);
 

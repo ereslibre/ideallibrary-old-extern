@@ -50,7 +50,7 @@ AnObject::AnObject(Object *parent)
 
 void AnObject::emitIt()
 {
-    emit(aSignal);
+    aSignal.emit();
     Timer::callAfter(1000, this, &AnObject::emitIt);
 }
 

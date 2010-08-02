@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     Application app(argc, argv);
 
     File f(app.getPath(Application::Home), &app);
-    Object::connectStatic(f.statResult, statResult);
+    f.statResult.connectStatic(statResult);
     Thread *stat = f.stat(Thread::Joinable);
     stat->execAndJoin();
     delete stat;

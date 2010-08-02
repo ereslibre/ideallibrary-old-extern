@@ -60,24 +60,24 @@ MediaPlayer::MediaPlayer(Object *parent)
     , m_stop(new MediaButton(this))
     , m_quit(new MediaButton(this))
 {
-    connectMulti(m_playPause->clicked, this, &MediaPlayer::executeAction);
-    connectMulti(m_stop->clicked, this, &MediaPlayer::executeAction);
-    connectMulti(m_quit->clicked, this, &MediaPlayer::executeAction);
+    m_playPause->clicked.connectMulti(this, &MediaPlayer::executeAction);
+    m_stop->clicked.connectMulti(this, &MediaPlayer::executeAction);
+    m_quit->clicked.connectMulti(this, &MediaPlayer::executeAction);
 }
 
 void MediaPlayer::simulatePlayPauseClick()
 {
-    emit(m_playPause->clicked);
+    m_playPause->clicked.emit();
 }
 
 void MediaPlayer::simulateStopClick()
 {
-    emit(m_stop->clicked);
+    m_stop->clicked.emit();
 }
 
 void MediaPlayer::simulateQuitClick()
 {
-    emit(m_quit->clicked);
+    m_quit->clicked.emit();
 }
 
 void MediaPlayer::executeAction(Object *sender)

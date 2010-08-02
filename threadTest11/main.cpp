@@ -37,7 +37,7 @@ int main(int argc, char **argv)
     Application app(argc, argv);
 
     Thread *thread = new Thread(&app, Thread::Joinable);
-    Object::connectStatic(thread->started, newThreadFunction);
+    thread->started.connectStatic(newThreadFunction);
     thread->exec();
     for (int i = 0; i < 10; ++i) {
         IDEAL_SDEBUG("*** In old thread");

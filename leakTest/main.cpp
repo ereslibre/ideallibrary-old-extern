@@ -37,7 +37,7 @@ public:
 
     void emitMySignal(iint32 value)
     {
-        emit(mySignal, value);
+        mySignal.emit(value);
     }
 };
 

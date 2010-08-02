@@ -50,7 +50,7 @@ OneClass::OneClass(Object *parent)
 void OneClass::run()
 {
     // Do expensive math here
-    emit(resultOfHeavyMath, 1234);
+    resultOfHeavyMath.emit(1234);
 }
 
 int main(int argc, char **argv)
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
     Application app(argc, argv);
 
     OneClass *oneClass = new OneClass(&app);
-    Object::connectStatic(oneClass->resultOfHeavyMath, printResult);
+    oneClass->resultOfHeavyMath.connectStatic(printResult);
     oneClass->exec();
 
     Timer::wait(500);

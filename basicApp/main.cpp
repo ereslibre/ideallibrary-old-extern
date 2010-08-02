@@ -42,12 +42,12 @@ public:
 
     void emitMySignal()
     {
-        emit(mySignal);
+        mySignal.emit();
     }
 
     void emitPushed(bool state)
     {
-        emit(pushed, true);
+        pushed.emit(true);
     }
 };
 

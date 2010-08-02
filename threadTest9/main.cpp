@@ -43,11 +43,11 @@ int main(int argc, char **argv)
 
     Timer t(&app);
     t.setInterval(100);
-    Object::connectStaticSynchronized(t.timeout, myStaticMethod, commonMutex);
+    t.timeout.connectStaticSynchronized(myStaticMethod, commonMutex);
 
     Timer t2(&app);
     t2.setInterval(100);
-    Object::connectStaticSynchronized(t2.timeout, myStaticMethod, commonMutex);
+    t2.timeout.connectStaticSynchronized(myStaticMethod, commonMutex);
 
     t.start();
     t2.start();

@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     Application app(argc, argv);
 
     File f(app.getPath(Application::Home), &app);
-    Object::connectStatic(f.event, eventReceived);
+    f.event.connectStatic(eventReceived);
     f.setTrackEvents(File::AllEvent);
 
     return app.exec();
