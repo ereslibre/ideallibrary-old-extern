@@ -155,60 +155,60 @@ int main(int argc, char **argv)
     OtherObject *otherObject = new OtherObject(&app);
 
     // connect a signal to a static function
-    IdealCore::Object::connectStatic(myObject->mySignal, function);
+    myObject->mySignal.connectStatic(function);
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
-    IdealCore::Object::disconnectStatic(myObject->mySignal, function);
+    myObject->mySignal.disconnectStatic(function);
     myObject->emitMySignal();
 
     // connect a signal to another signal
-    IdealCore::Object::connect(myObject->mySignal, otherObject->otherSignal);
+    myObject->mySignal.connect(otherObject->otherSignal);
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
-    IdealCore::Object::disconnect(myObject->mySignal, otherObject->otherSignal);
+    myObject->mySignal.disconnect(otherObject->otherSignal);
     myObject->emitMySignal();
 
     // connect a signal to a slot
-    IdealCore::Object::connect(myObject->mySignal, otherObject, &OtherObject::receivedSignal);
+    myObject->mySignal.connect(otherObject, &OtherObject::receivedSignal);
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
-    IdealCore::Object::disconnect(myObject->mySignal, otherObject, &OtherObject::receivedSignal);
+    myObject->mySignal.disconnect(otherObject, &OtherObject::receivedSignal);
     myObject->emitMySignal();
 
     // connect a signal to a static slot
-    IdealCore::Object::connectStatic(myObject->mySignal, OtherObject::staticMethod);
+    myObject->mySignal.connectStatic(OtherObject::staticMethod);
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
-    IdealCore::Object::disconnectStatic(myObject->mySignal, OtherObject::staticMethod);
+    myObject->mySignal.disconnectStatic(OtherObject::staticMethod);
     myObject->emitMySignal();
 
     // connect two signals to a multislot
-    IdealCore::Object::connectMulti(myObject->mySignal, otherObject, &OtherObject::multiSlot);
-    IdealCore::Object::connectMulti(myObject->otherSignal, otherObject, &OtherObject::multiSlot);
+    myObject->mySignal.connectMulti(otherObject, &OtherObject::multiSlot);
+    myObject->otherSignal.connectMulti(otherObject, &OtherObject::multiSlot);
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
     myObject->emitOtherSignal();
-    IdealCore::Object::disconnectMulti(myObject->mySignal, otherObject, &OtherObject::multiSlot);
-    IdealCore::Object::disconnectMulti(myObject->otherSignal, otherObject, &OtherObject::multiSlot);
+    myObject->mySignal.disconnectMulti(otherObject, &OtherObject::multiSlot);
+    myObject->otherSignal.disconnectMulti(otherObject, &OtherObject::multiSlot);
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
     myObject->emitOtherSignal();
 
     // connect two signals to a static multislot
-    IdealCore::Object::connectStaticMulti(myObject->mySignal, OtherObject::staticMethodMulti);
-    IdealCore::Object::connectStaticMulti(myObject->otherSignal, OtherObject::staticMethodMulti);
+    myObject->mySignal.connectStaticMulti(OtherObject::staticMethodMulti);
+    myObject->otherSignal.connectStaticMulti(OtherObject::staticMethodMulti);
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
     myObject->emitOtherSignal();
-    IdealCore::Object::disconnectStaticMulti(myObject->mySignal, OtherObject::staticMethodMulti);
-    IdealCore::Object::disconnectStaticMulti(myObject->otherSignal, OtherObject::staticMethodMulti);
+    myObject->mySignal.disconnectStaticMulti(OtherObject::staticMethodMulti);
+    myObject->otherSignal.disconnectStaticMulti(OtherObject::staticMethodMulti);
     myObject->emitMySignal();
     myObject->emitMySignalFromConst();
     myObject->emitOtherSignal();
 
     // connect a signal to a virtual method in base class
     A *a = new B(&app);
-    IdealCore::Object::connect(myObject->mySignal, a, &A::virtualMethod);
+    myObject->mySignal.connect(a, &A::virtualMethod);
     myObject->emitMySignal();
     delete a;
 

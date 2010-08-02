@@ -76,8 +76,8 @@ int main(int argc, char **argv)
     Implementation *object2 = new Implementation(&app);
     Trigger *trigger = new Trigger(&app);
 
-    Object::connect(trigger->trigger, object, &Abstract::test);
-    Object::connect(trigger->trigger, object2, &Abstract::test);
+    trigger->trigger.connect(object, &Abstract::test);
+    trigger->trigger.connect(object2, &Abstract::test);
 
     trigger->emitSignal();
 

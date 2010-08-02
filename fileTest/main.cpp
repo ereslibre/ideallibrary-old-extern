@@ -92,7 +92,7 @@ int main(int argc, char **argv)
     {
         IDEAL_SDEBUG("*** File:\tftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.22.1.tar.gz");
         File f("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.22.1.tar.gz", &app);
-        Object::connectStatic(f.statResult, fileSize);
+        f.statResult.connectStatic(fileSize);
         Thread *statJob = f.stat(Thread::Joinable);
         statJob->exec();
         statJob->join();
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
     {
         IDEAL_SDEBUG("*** File:\tftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.0.tar.gz");
         File f("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.0.tar.gz", &app);
-        Object::connectStatic(f.statResult, fileSize);
+        f.statResult.connectStatic(fileSize);
         Thread *statJob = f.stat(Thread::Joinable);
         statJob->exec();
         statJob->join();
@@ -109,7 +109,7 @@ int main(int argc, char **argv)
     {
         IDEAL_SDEBUG("*** File:\tftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.8.tar.gz");
         File f("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.8.tar.gz", &app);
-        Object::connectStatic(f.statResult, fileSize);
+        f.statResult.connectStatic(fileSize);
         Thread *statJob = f.stat(Thread::Joinable);
         statJob->exec();
         statJob->join();
@@ -117,7 +117,7 @@ int main(int argc, char **argv)
     {
         IDEAL_SDEBUG("*** File:\tftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.16.tar.gz");
         File f("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.16.tar.gz", &app);
-        Object::connectStatic(f.statResult, fileSize);
+        f.statResult.connectStatic(fileSize);
         Thread *statJob = f.stat(Thread::Joinable);
         statJob->exec();
         statJob->join();
@@ -125,7 +125,7 @@ int main(int argc, char **argv)
     {
         IDEAL_SDEBUG("*** File:\tftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.29.1.tar.gz");
         File f("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.29.1.tar.gz", &app);
-        Object::connectStatic(f.statResult, fileSize);
+        f.statResult.connectStatic(fileSize);
         Thread *statJob = f.stat(Thread::Joinable);
         statJob->exec();
         statJob->join();
@@ -133,7 +133,7 @@ int main(int argc, char **argv)
     {
         IDEAL_SDEBUG("*** File:\tfooishbar://foo");
         File f("fooishbar://foo", &app);
-        Object::connectStatic(f.statResult, fileSize);
+        f.statResult.connectStatic(fileSize);
         Thread *statJob = f.stat(Thread::Joinable);
         statJob->exec();
         statJob->join();
@@ -141,8 +141,8 @@ int main(int argc, char **argv)
     {
         IDEAL_SDEBUG("*** File:\tftp://ftp.ereslibre.es");
         File f("ftp://ftp.ereslibre.es", &app);
-        Object::connectStatic(f.statResult, fileSize);
-        Object::connectStaticMulti(f.error, error);
+        f.statResult.connectStatic(fileSize);
+        f.error.connectStaticMulti(error);
         Thread *statJob = f.stat(Thread::Joinable);
         statJob->exec();
         statJob->join();
@@ -154,7 +154,7 @@ int main(int argc, char **argv)
 
     {
         File kernelReadme("http://www.kernel.org/pub/linux/kernel/README", &app);
-        Object::connect(kernelReadme.dataRead, &app, &MyApplication::fileData);
+        kernelReadme.dataRead.connect(&app, &MyApplication::fileData);
 
         Thread *readmeContentsJob = kernelReadme.get(File::NoMaxBytes, Thread::Joinable);
         readmeContentsJob->exec();
@@ -169,7 +169,7 @@ int main(int argc, char **argv)
         contentsJob1KB->join();
 
         File kernelReadmeFtp("ftp://ftp.kernel.org/pub/linux/kernel/README", &app);
-        Object::connect(kernelReadmeFtp.dataRead, &app, &MyApplication::fileData);
+        kernelReadmeFtp.dataRead.connect(&app, &MyApplication::fileData);
 
         IDEAL_SDEBUG("");
         IDEAL_SDEBUG("");
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 
         Uri bashrcUri(app.getPath(Application::Home), ".bashrc");
         File bashrc(bashrcUri, &app);
-        Object::connect(bashrc.dataRead, &app, &MyApplication::fileData);
+        bashrc.dataRead.connect(&app, &MyApplication::fileData);
 
         IDEAL_SDEBUG("");
         IDEAL_SDEBUG("*** Retrieving " << bashrcUri.uri());
@@ -198,7 +198,7 @@ int main(int argc, char **argv)
     IDEAL_SDEBUG("");
 
     File listDir("ftp://ftp.kernel.org/pub/", &app);
-    Object::connect(listDir.dataRead, &app, &MyApplication::fileData);
+    listDir.dataRead.connect(&app, &MyApplication::fileData);
     Thread *listDirStat = listDir.get(File::NoMaxBytes, Thread::Joinable);
     listDirStat->exec();
     listDirStat->join();
@@ -208,7 +208,7 @@ int main(int argc, char **argv)
     IDEAL_SDEBUG("");
 
     File listLocalDir(app.getPath(Application::Home), &app);
-    Object::connect(listLocalDir.dirRead, &app, &MyApplication::dirData);
+    listLocalDir.dirRead.connect(&app, &MyApplication::dirData);
     Thread *listLocalDirStat = listLocalDir.get(File::NoMaxBytes, Thread::Joinable);
     listLocalDirStat->exec();
     listLocalDirStat->join();
@@ -218,11 +218,11 @@ int main(int argc, char **argv)
     IDEAL_SDEBUG("");
 
     File f1("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.22.1.tar.gz", &app);
-    Object::connectMulti(f1.statResult, &app, &MyApplication::fileSize);
+    f1.statResult.connectMulti(&app, &MyApplication::fileSize);
     File f2("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.0.tar.gz", &app);
-    Object::connectMulti(f2.statResult, &app, &MyApplication::fileSize);
+    f2.statResult.connectMulti(&app, &MyApplication::fileSize);
     File f3("ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-2.6.29.1.tar.gz", &app);
-    Object::connectMulti(f3.statResult, &app, &MyApplication::fileSize);
+    f3.statResult.connectMulti(&app, &MyApplication::fileSize);
     Thread *statJob = f1.stat();
     statJob->exec();
     statJob = f2.stat();

@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     Application app(argc, argv);
 
     A *a = new A(&app);
-    Object::connect(a->signal, a, &A::deleteNow);
+    a->signal.connect(a, &A::deleteNow);
     a->emitMySignal();
     
     return 0;

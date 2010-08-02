@@ -77,8 +77,8 @@ int main(int argc, char **argv)
 
     OneClass *oneClass = new OneClass(&app);
     OtherClass *otherClass = new OtherClass(&app);
-    Object::connect(oneClass->resultOfHeavyMath, otherClass->resultOfHeavyMath);
-    Object::connectStatic(otherClass->resultOfHeavyMath, printResult);
+    oneClass->resultOfHeavyMath.connect(otherClass->resultOfHeavyMath);
+    otherClass->resultOfHeavyMath.connectStatic(printResult);
     oneClass->exec();
 
     Timer::wait(500);

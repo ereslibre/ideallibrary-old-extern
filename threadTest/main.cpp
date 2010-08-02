@@ -153,7 +153,7 @@ int main(int argc, char **argv)
 
     IDEAL_SDEBUG("*** Going to carefully connect two parties going on (BTW, I am " << pthread_self() << ")");
 
-    Object::connect(oneClass->object->aSignal, otherClass->object, &AnObject::slot);
+    oneClass->object->aSignal.connect(otherClass->object, &AnObject::slot);
 
     return app.exec();
 }

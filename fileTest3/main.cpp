@@ -34,7 +34,7 @@ int main(int argc, char **argv)
         IDEAL_SDEBUG("*** Going to stat " << app.getPath(Application::Home));
 
         File f(app.getPath(Application::Home), &app);
-        Object::connect(f.statResult, &result, &AsyncResult::set<ProtocolHandler::StatResult>);
+        f.statResult.connect(&result, &AsyncResult::set<ProtocolHandler::StatResult>);
         f.stat(Thread::Joinable)->execAndJoin();
 
         // it is possible that statResult wasn't emitted, (e.g. when not enough permissions to
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
         IDEAL_SDEBUG("*** Going to stat /root/foo");
 
         File f("/root/foo", &app);
-        Object::connect(f.statResult, &result, &AsyncResult::set<ProtocolHandler::StatResult>);
+        f.statResult.connect(&result, &AsyncResult::set<ProtocolHandler::StatResult>);
         f.stat(Thread::Joinable)->execAndJoin();
 
         const ProtocolHandler::StatResult statResult = result.get<ProtocolHandler::StatResult>(0);
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
         IDEAL_SDEBUG("*** Going to stat ftp://ftp.gnu.org");
 
         File f("ftp://ftp.gnu.org", &app);
-        Object::connect(f.statResult, &result, &AsyncResult::set<ProtocolHandler::StatResult>);
+        f.statResult.connect(&result, &AsyncResult::set<ProtocolHandler::StatResult>);
         f.stat(Thread::Joinable)->execAndJoin();
 
         ProtocolHandler::StatResult statResult = result.get<ProtocolHandler::StatResult>(0);

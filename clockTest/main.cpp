@@ -267,7 +267,7 @@ int main(int argc, char **argv)
 
     IdealCore::Timer *timer = new IdealCore::Timer(&app);
     timer->setInterval(1000);
-    IdealCore::Object::connect(timer->timeout, myWidget, &MyWidget::myTimeout);
+    timer->timeout.connect(myWidget, &MyWidget::myTimeout);
     timer->start(IdealCore::Timer::NoSingleShot);
 
     return app.exec();

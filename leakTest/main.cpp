@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     for (iint32 i = 0; i < 1000; ++i) {
         MyObject *myObject = new MyObject(&app);
         OtherObject *otherObject = new OtherObject(&app);
-        Object::connect(myObject->mySignal, otherObject, &OtherObject::receivedSignal);
+        myObject->mySignal.connect(otherObject, &OtherObject::receivedSignal);
         objectList.push_back(myObject);
         objectList.push_back(otherObject);
     }
@@ -96,7 +96,7 @@ int main(int argc, char **argv)
 #else
     MyObject *object = new MyObject(&app);
     OtherObject *otherObject = new OtherObject(&app);
-    Object::connect(object->mySignal, otherObject, &OtherObject::receivedSignal);
+    object->mySignal.connect(otherObject, &OtherObject::receivedSignal);
     for (iint32 i = 0; i < 1000; ++i) {
         object->emitMySignal(i);
     }

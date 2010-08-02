@@ -101,7 +101,7 @@ int main(int argc, char **argv)
     MyObject *myObject = new MyObject(&app);
     OtherObject *otherObject = new OtherObject(&app);
 
-    Object::connect(myObject->mySignal, otherObject, &OtherObject::receivedSignal);
+    myObject->mySignal.connect(otherObject, &OtherObject::receivedSignal);
 
     delete myObject;
     delete otherObject;
@@ -112,7 +112,7 @@ int main(int argc, char **argv)
     GeniousPointer<MyObject> myGeniousPointer(geniousPointerObj);
     otherObject = new OtherObject(&app);
 
-    Object::connect(myGeniousPointer->mySignal, otherObject, &OtherObject::receivedSignal);
+    myGeniousPointer->mySignal.connect(otherObject, &OtherObject::receivedSignal);
 
     myGeniousPointer->emitMySignal(); // normal pointer usage
 

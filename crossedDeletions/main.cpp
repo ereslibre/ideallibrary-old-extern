@@ -48,8 +48,8 @@ int main(int argc, char **argv)
     A *a = new A(&app);
     Object *b = new Object(&app);
     IDEAL_SDEBUG("a is " << a << " while b is " << b << ". app is " << &app);
-    Object::connect(a->signal, b, &Object::deleteNow);
-    Object::connect(b->destroyed, a, &Object::deleteNow);
+    a->signal.connect(b, &Object::deleteNow);
+    b->destroyed.connect(a, &Object::deleteNow);
     a->emitMySignal();
 
     return 0;

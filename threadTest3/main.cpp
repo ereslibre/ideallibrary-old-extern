@@ -71,21 +71,21 @@ OneClass::OneClass(Object *parent)
 
 void OneClass::run()
 {
-    Object::connect(object->aSignal, object, &AnObject::slot);
-    Object::connect(object->aSignal, object, &AnObject::slot);
-    Object::connect(object->aSignal, object, &AnObject::slot);
-    Object::connect(object->aSignal, object, &AnObject::slot);
-    Object::connect(object->aSignal, object, &AnObject::slot);
-    Object::disconnect(object->aSignal, object, &AnObject::slot);
-    Object::disconnect(object->aSignal, object, &AnObject::slot);
-    Object::disconnect(object->aSignal, object, &AnObject::slot);
-    Object::disconnect(object->aSignal, object, &AnObject::slot);
+    object->aSignal.connect(object, &AnObject::slot);
+    object->aSignal.connect(object, &AnObject::slot);
+    object->aSignal.connect(object, &AnObject::slot);
+    object->aSignal.connect(object, &AnObject::slot);
+    object->aSignal.connect(object, &AnObject::slot);
+    object->aSignal.disconnect(object, &AnObject::slot);
+    object->aSignal.disconnect(object, &AnObject::slot);
+    object->aSignal.disconnect(object, &AnObject::slot);
+    object->aSignal.disconnect(object, &AnObject::slot);
     object->emitIt();
     object->emitIt();
     object->emitIt();
     object->emitIt();
     object->emitIt();
-    Object::disconnect(object->aSignal, object, &AnObject::slot);
+    object->aSignal.disconnect(object, &AnObject::slot);
 }
 
 int main(int argc, char **argv)

@@ -93,7 +93,7 @@ int main(int argc, char **argv)
     myWidget->show(Point(0, 0));
     pushButton->show(Point(100, 200));
 
-    IdealCore::Object::connect(pushButton->clicked, &app, &Application::quit);
+    pushButton->clicked.connect(&app, &Application::quit);
 
     return app.exec();
 }
