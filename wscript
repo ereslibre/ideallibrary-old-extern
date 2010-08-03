@@ -34,7 +34,7 @@ def configure(conf):
     conf.find_program('pkg-config')
     conf.check_cfg(package = 'idealcore', args = '--cflags --libs')
     conf.check_cfg(package = 'idealgui', args = '--cflags --libs')
-    conf.env['CXXFLAGS'] += ['-std=c++0x', '-g']
+    conf.env['CXXFLAGS'] += ['-g']
     conf.sub_config(['ownModulesTest',
                      'pathTest'])
 
